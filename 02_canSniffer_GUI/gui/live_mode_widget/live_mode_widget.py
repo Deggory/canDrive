@@ -17,7 +17,6 @@ class LiveModeWidget(QWidget):
     def __init__(self, project_data: ProjectData = ProjectData(), parent=None):
         super().__init__(parent=parent)
 
-        print("LiveModeWidget")
         try:
             self.main_layout = QVBoxLayout()
             self.setLayout(self.main_layout)

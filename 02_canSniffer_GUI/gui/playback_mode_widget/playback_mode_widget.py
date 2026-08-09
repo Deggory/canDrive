@@ -8,8 +8,6 @@ class PlaybackModeWidget(QWidget):
     def __init__(self, project_data: ProjectData = ProjectData(), parent=None):
         super().__init__(parent=parent)
 
-        print("PlaybackModeWidget")
-
         self.main_layout = QVBoxLayout()
         self.setLayout(self.main_layout)
 
