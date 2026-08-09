@@ -8,7 +8,7 @@ class MessageFilterWidget(QWidget):
         super().__init__(parent=parent)
 
         size_policy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
-        # size_policy.setHorizontalStretch(0)
+        size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         self.setSizePolicy(size_policy)
 

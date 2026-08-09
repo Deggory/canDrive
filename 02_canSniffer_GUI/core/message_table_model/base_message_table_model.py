@@ -23,3 +23,5 @@ class BaseMessageTableModel(QAbstractTableModel):
         if orientation == Qt.Orientation.Horizontal and section < len(self.__horizontal_headers):
             if role == Qt.ItemDataRole.DisplayRole:
                 return self.__horizontal_headers[section]
+
+        return None

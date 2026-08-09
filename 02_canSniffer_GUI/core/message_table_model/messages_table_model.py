@@ -36,7 +36,7 @@ class MessagesTableModel(BaseMessageTableModel):
         self.dataChanged.emit(
             self.createIndex(0, 0),
             self.createIndex(self.rowCount(), 2),
-            [Qt.BackgroundColorRole])
+            [Qt.ItemDataRole.BackgroundRole])
         # self.invalidateFilter()
 
     def set_highlight_new_values(self, value):
@@ -44,10 +44,10 @@ class MessagesTableModel(BaseMessageTableModel):
         self.dataChanged.emit(
             self.createIndex(0, 0),
             self.createIndex(self.rowCount(), self.columnCount()),
-            [Qt.BackgroundColorRole])
+            [Qt.ItemDataRole.BackgroundRole])
 
     def data(self, index: QModelIndex, role: int = ...):
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             message: CanMessageTimestamp = self._data[index.row()]
             value = message.get_value_from_index(index.column())
             if index.column() == 1:
@@ -55,10 +55,10 @@ class MessagesTableModel(BaseMessageTableModel):
                     return f"{value} ({self.project_data.label_dict[value]})"
             return value
 
-        if role == Qt.TextAlignmentRole:
-            return Qt.AlignVCenter | Qt.AlignHCenter
+        if role == Qt.ItemDataRole.TextAlignmentRole:
+            return Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter
 
-        if role == Qt.BackgroundColorRole:
+        if role == Qt.ItemDataRole.BackgroundRole:
             message: CanMessageTimestamp = self._data[index.row()]
             if self.highlight_new_values:
                 changed_col = index.column() - 5
@@ -68,7 +68,7 @@ class MessagesTableModel(BaseMessageTableModel):
             if self.highlight_new_packets and message.new_identifier and index.column() in [0, 1]:
                 return QColor(150, 150, 255)
 
-        if role == Qt.UserRole:
+        if role == Qt.ItemDataRole.UserRole:
             message: CanMessage = self._data[index.row()]
             return message
 

@@ -22,12 +22,18 @@ class MessageTableFilterProxyModel(QSortFilterProxyModel):
         self.invalidateFilter()
 
     def set_hide_packets_older_than(self, value):
-        self.hide_packets_older_than = value
-        self.invalidateFilter()
+        try:
+            self.hide_packets_older_than = value
+            self.invalidateFilter()
+        except Exception as e:
+            print(e)
 
     def set_hide_packets_older_than_value(self, value: float):
-        self.hide_packets_older_than_value = value
-        self.invalidateFilter()
+        try:
+            self.hide_packets_older_than_value = value
+            self.invalidateFilter()
+        except Exception as e:
+            print(e)
 
     def set_show_packets_with_id(self, value):
         self.show_packets_with_id = value
@@ -46,8 +52,11 @@ class MessageTableFilterProxyModel(QSortFilterProxyModel):
         return split_ids
 
     def set_show_packets_with_id_vales(self, values):
-        self.show_packets_with_id_list = self.__list_with_ints_from_string(values)
-        self.invalidateFilter()
+        try:
+            self.show_packets_with_id_list = self.__list_with_ints_from_string(values)
+            self.invalidateFilter()
+        except Exception as e:
+            print(e)
 
     def set_hide_packets_with_id(self, value):
         self.hide_packets_with_id = value
@@ -73,21 +82,21 @@ class MessageTableFilterProxyModel(QSortFilterProxyModel):
 
     def hide_packets_older_than_filter(self, source_row: int, source_parent: QModelIndex):
         index = self.sourceModel().index(source_row, COLUMN_TIME, source_parent)
-        value = self.sourceModel().data(index, Qt.DisplayRole)
+        value = self.sourceModel().data(index, Qt.ItemDataRole.DisplayRole)
         if value >= self.hide_packets_older_than_value:
             return True
         return False
 
     def show_packets_with_id_filter(self, source_row, source_parent):
         index = self.sourceModel().index(source_row, COLUMN_ID, source_parent)
-        value = self.sourceModel().data(index, Qt.DisplayRole)
+        value = self.sourceModel().data(index, Qt.ItemDataRole.DisplayRole)
         if value in self.show_packets_with_id_list:
             return True
         return False
 
     def hide_packets_with_id_filter(self, source_row, source_parent):
         index = self.sourceModel().index(source_row, COLUMN_ID, source_parent)
-        value = self.sourceModel().data(index, Qt.DisplayRole)
+        value = self.sourceModel().data(index, Qt.ItemDataRole.DisplayRole)
         if value not in self.hide_packets_with_id_list:
             return True
         return False

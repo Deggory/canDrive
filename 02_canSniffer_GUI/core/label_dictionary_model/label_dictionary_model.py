@@ -34,10 +34,13 @@ class LabelDictionaryModel(QAbstractTableModel):
         if role == Qt.ItemDataRole.TextAlignmentRole:
             return Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter
 
+        return None
+
     def headerData(self, section: int, orientation: Any, role: int = ...) -> Any:
         if orientation == Qt.Orientation.Horizontal and section < len(self.__horizontal_headers):
             if role == Qt.ItemDataRole.DisplayRole:
                 return self.__horizontal_headers[section]
+        return None
 
     def add_data(self, key, value):
         self.beginInsertRows(QModelIndex(), 0, 0)
@@ -51,7 +54,7 @@ class LabelDictionaryModel(QAbstractTableModel):
 
     def flags(self, index):
         if index.column() == 1:
-            return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEditable
+            return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEditable  # type: ignore
         else:
             return Qt.ItemFlag.ItemIsEnabled
 
@@ -61,3 +64,4 @@ class LabelDictionaryModel(QAbstractTableModel):
             self.__data[key] = value
             self.dataChanged.emit(index, index)
             return True
+        return None

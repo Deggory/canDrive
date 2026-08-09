@@ -20,13 +20,7 @@ class CanSnifferMainWidget(QWidget):
         self.__project_location = project_location
         self.project_data = load_sniff(self.__project_location)
 
-        self.live_mode_widget = LiveModeWidget(self.project_data)
-        self.live_mode_widget.message_widget.message_filter_widget.btn_add_id_label.clicked.connect(
-            self.on_clicked_add_id_label)
-
-        self.live_mode_widget.message_widget.message_filter_widget.btn_add_message.clicked.connect(
-            self.on_clicked_add_decoded_message
-        )
+        self.live_mode_widget = self.create_live_mode_widget()
 
         self.playback_mode_widget = PlaybackModeWidget(self.project_data)
 
@@ -46,9 +40,19 @@ class CanSnifferMainWidget(QWidget):
 
         self.main_layout.addWidget(self.tab_widget)
 
-        self.tab_widget.setCurrentIndex(3)
+        self.tab_widget.setCurrentIndex(1)
 
         self.__load_styles()
+
+    def create_live_mode_widget(self):
+        live_mode_widget = LiveModeWidget(self.project_data)
+        live_mode_widget.message_widget.message_filter_widget.btn_add_id_label.clicked.connect(
+            self.on_clicked_add_id_label)
+
+        live_mode_widget.message_widget.message_filter_widget.btn_add_message.clicked.connect(
+            self.on_clicked_add_decoded_message
+        )
+        return live_mode_widget
 
     def __load_styles(self):
         self.setStyleSheet(read_file("gui/main_widget/can_sniffer_main_widget.css"))

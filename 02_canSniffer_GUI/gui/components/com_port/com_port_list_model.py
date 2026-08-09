@@ -25,6 +25,8 @@ class ComPortListModel(QAbstractListModel):
         if role == Qt.ItemDataRole.DisplayRole:
             return com_port
 
+        return None
+
     def update_data(self, list_of_com_ports):
         self.beginInsertRows(
             QModelIndex(), len(self.__com_ports), len(self.__com_ports)

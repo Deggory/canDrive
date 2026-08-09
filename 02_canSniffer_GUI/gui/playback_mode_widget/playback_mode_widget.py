@@ -18,8 +18,12 @@ class PlaybackModeWidget(QWidget):
 
         self.create_actions()
 
-        self.message_widget = MessageWidget(project_data)
-        self.main_layout.addWidget(self.message_widget)
+        self.__message_widget = MessageWidget(project_data)
+        self.main_layout.addWidget(self.__message_widget)
+
+    @property
+    def message_widget(self):
+        return self.__message_widget
 
     def create_actions(self):
         actions_layout = QHBoxLayout()

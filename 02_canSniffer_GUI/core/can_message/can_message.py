@@ -45,6 +45,7 @@ class CanMessage(BaseModel):
                     return self.data[7]
             case _:
                 return None
+        return None
 
     @staticmethod
     def message_from_csv(csv_message):

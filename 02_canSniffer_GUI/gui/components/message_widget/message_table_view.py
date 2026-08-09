@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QSize, Qt, pyqtSignal, QItemSelectionModel, QItemSelection, QModelIndex
+from PyQt6.QtCore import QSize, Qt, pyqtSignal, QItemSelectionModel, QModelIndex
 from PyQt6.QtWidgets import QTableView, QSizePolicy, QAbstractScrollArea, QAbstractItemView, QMenu
 
 from core.can_message.can_message import CanMessage

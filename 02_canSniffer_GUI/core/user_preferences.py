@@ -4,9 +4,7 @@ from typing import List, Optional, Any
 from pydantic import BaseModel
 from pydantic_yaml import to_yaml_file, parse_yaml_raw_as
 
-SAVE_LOCATION = Path(
-    Path(os.getenv("LOCALAPPDATA")) / "can_sniffer" / "user_preferences.yaml"
-)
+SAVE_LOCATION = Path(Path(os.getenv("LOCALAPPDATA")) / "can_sniffer" / "user_preferences.yaml")
 
 
 class UserPreferences(BaseModel):

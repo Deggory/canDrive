@@ -18,44 +18,53 @@ class LiveModeWidget(QWidget):
         super().__init__(parent=parent)
 
         print("LiveModeWidget")
+        try:
+            self.main_layout = QVBoxLayout()
+            self.setLayout(self.main_layout)
 
-        self.main_layout = QVBoxLayout()
-        self.setLayout(self.main_layout)
+            self.__connected_to_serial = False
+            self.__sniffing = False
 
-        self.__connected_to_serial = False
-        self.__sniffing = False
+            self.create_actions()
 
-        self.create_actions()
+            self.__message_widget = MessageWidget(project_data)
+            self.main_layout.addWidget(self.__message_widget)
+        except Exception as e:
+            print(e)
 
-        self.message_widget = MessageWidget(project_data)
-        self.main_layout.addWidget(self.message_widget)
+    @property
+    def message_widget(self):
+        return self.__message_widget
 
     # noinspection PyAttributeOutsideInit
     # noinspection PyUnresolvedReferences
     def create_actions(self):
-        actions_layout = QHBoxLayout()
-        self.main_layout.addLayout(actions_layout)
+        try:
+            actions_layout = QHBoxLayout()
+            self.main_layout.addLayout(actions_layout)
 
-        self.__combo_com_ports = ComPortComboBox()
-        actions_layout.addWidget(self.__combo_com_ports)
+            self.__combo_com_ports = ComPortComboBox()
+            actions_layout.addWidget(self.__combo_com_ports)
 
-        self.__btn_connecting = QPushButton("Connect")
-        self.__btn_connecting.clicked.connect(self.__on_connecting)
-        self.__btn_sniffing = QPushButton("Start Sniffing")
-        self.__btn_sniffing.clicked.connect(self.__on_sniffing)
+            self.__btn_connecting = QPushButton("Connect")
+            self.__btn_connecting.clicked.connect(self.__on_connecting)
+            self.__btn_sniffing = QPushButton("Start Sniffing")
+            self.__btn_sniffing.clicked.connect(self.__on_sniffing)
 
-        self.__lbl_can_channel = QLabel("CAN Channel:")
-        self.__combo_can_channel = QComboBox()
-        self.__combo_can_channel.addItem("CAN_H")
-        self.__combo_can_channel.addItem("CAN_M")
-        self.__combo_can_channel.addItem("CAN_L")
+            self.__lbl_can_channel = QLabel("CAN Channel:")
+            self.__combo_can_channel = QComboBox()
+            self.__combo_can_channel.addItem("CAN_H")
+            self.__combo_can_channel.addItem("CAN_M")
+            self.__combo_can_channel.addItem("CAN_L")
 
-        actions_layout.addWidget(self.__btn_connecting)
-        actions_layout.addWidget(self.__btn_sniffing)
-        actions_layout.addWidget(self.__lbl_can_channel)
-        actions_layout.addWidget(self.__combo_can_channel)
+            actions_layout.addWidget(self.__btn_connecting)
+            actions_layout.addWidget(self.__btn_sniffing)
+            actions_layout.addWidget(self.__lbl_can_channel)
+            actions_layout.addWidget(self.__combo_can_channel)
 
-        self.__update_actions()
+            self.__update_actions()
+        except Exception as e:
+            print(e)
 
     def __update_actions(self):
         if not self.__connected_to_serial:
@@ -81,12 +90,18 @@ class LiveModeWidget(QWidget):
                 self.__combo_can_channel.setEnabled(False)
 
     def __on_connecting(self):
-        if not self.__connected_to_serial and self.__combo_com_ports.currentText() == "":
-            return
+        try:
+            if not self.__connected_to_serial and self.__combo_com_ports.currentText() == "":
+                return
 
-        self.__connected_to_serial = not self.__connected_to_serial
-        self.__update_actions()
+            self.__connected_to_serial = not self.__connected_to_serial
+            self.__update_actions()
+        except Exception as e:
+            print(e)
 
     def __on_sniffing(self):
-        self.__sniffing = not self.__sniffing
-        self.__update_actions()
+        try:
+            self.__sniffing = not self.__sniffing
+            self.__update_actions()
+        except Exception as e:
+            print(e)
