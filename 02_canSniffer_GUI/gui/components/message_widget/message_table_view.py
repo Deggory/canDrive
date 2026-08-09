@@ -118,3 +118,4 @@ class MessageTableView(QTableView):
         if selected_rows:
             last_row = selected_rows[-1]
             return self.messages_model.data(last_row, Qt.ItemDataRole.UserRole)
+        return None

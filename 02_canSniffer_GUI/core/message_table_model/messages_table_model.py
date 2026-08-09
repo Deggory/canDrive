@@ -71,6 +71,7 @@ class MessagesTableModel(BaseMessageTableModel):
         if role == Qt.ItemDataRole.UserRole:
             message: CanMessage = self._data[index.row()]
             return message
+        return None
 
     def get_data_in_latest_data(self, index) -> bool:
         message = self._data[index]

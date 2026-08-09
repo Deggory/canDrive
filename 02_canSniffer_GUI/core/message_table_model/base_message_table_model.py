@@ -4,7 +4,7 @@ from typing import Any
 
 
 class BaseMessageTableModel(QAbstractTableModel):
-    def __init__(self, data: list = None, headers=None, parent=None):
+    def __init__(self, data: list = None, headers=None, parent=None): # type: ignore
         super().__init__(parent=parent)
         if headers is None:
             headers = []
@@ -19,7 +19,7 @@ class BaseMessageTableModel(QAbstractTableModel):
     def columnCount(self, parent=None):
         return len(self.__horizontal_headers)
 
-    def headerData(self, section: int, orientation: Any, role: int = ...) -> Any:
+    def headerData(self, section: int, orientation: Any, role: int = ...) -> Any: # type: ignore
         if orientation == Qt.Orientation.Horizontal and section < len(self.__horizontal_headers):
             if role == Qt.ItemDataRole.DisplayRole:
                 return self.__horizontal_headers[section]

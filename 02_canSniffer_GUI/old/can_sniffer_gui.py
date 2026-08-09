@@ -108,9 +108,9 @@ class CanSnifferGUI(QMainWindow, canSniffer_ui.Ui_MainWindow):
             self.decodedMessagesTableWidget.setColumnWidth(i, 32)
         self.decodedMessagesTableWidget.setColumnWidth(1, 150)
         self.decodedMessagesTableWidget.horizontalHeader().setSectionResizeMode(
-            0, QHeaderView.Stretch
+            0, QHeaderView.ResizeMode.Stretch
         )
-        self.txTable.horizontalHeader().setSectionResizeMode(3, QHeaderView.Stretch)
+        self.txTable.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
         # self.showFullScreen()
 
     def stopPlayBackCallback(self):
@@ -415,7 +415,7 @@ class CanSnifferGUI(QMainWindow, canSniffer_ui.Ui_MainWindow):
                 )  # dark green
 
             self.mainMessageTableWidget.item(row, i).setTextAlignment(
-                Qt.AlignVCenter | Qt.AlignHCenter
+                Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter
             )
 
         self.receivedPackets = self.receivedPackets + 1
@@ -444,11 +444,12 @@ class CanSnifferGUI(QMainWindow, canSniffer_ui.Ui_MainWindow):
                                     table == self.decodedMessagesTableWidget and i == 0
                                 ):
                                     item.setTextAlignment(
-                                        Qt.AlignVCenter | Qt.AlignHCenter
+                                        Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter
                                     )
                                 table.setItem(row, i, item)
             except OSError:
                 print("file not found: " + path)
+        return None
 
     def loadSessionFromFile(self):
         if self.autoclearCheckBox.isChecked():
@@ -474,7 +475,7 @@ class CanSnifferGUI(QMainWindow, canSniffer_ui.Ui_MainWindow):
         newRow = self.idLabelDictTable.rowCount()
         self.idLabelDictTable.insertRow(newRow)
         widgetItem = QTableWidgetItem()
-        widgetItem.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
+        widgetItem.setTextAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter)
         widgetItem.setText(self.saveIdToDictLineEdit.text())
         self.idLabelDictTable.setItem(newRow, 0, QTableWidgetItem(widgetItem))
         widgetItem.setText(self.saveLabelToDictLineEdit.text())

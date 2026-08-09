@@ -25,7 +25,7 @@ class DecodedMessagesTableModel(BaseMessageTableModel):
         self.project_data = project_data
         super().__init__(data=project_data.decoded_messages, headers=headers, parent=parent)
 
-    def data(self, index: QModelIndex, role: int = ...):
+    def data(self, index: QModelIndex, role: int = Qt.ItemDataRole.DisplayRole):
         if role in [Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole]:
             message: DecodedCanMessage = self._data[index.row()]
             value = message.get_value_from_index(index.column())
@@ -49,7 +49,7 @@ class DecodedMessagesTableModel(BaseMessageTableModel):
         else:
             return Qt.ItemFlag.ItemIsEnabled
 
-    def setData(self, index, value, role):
+    def setData(self, index: QModelIndex, value, role:int= Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.EditRole:
             self._data[index.row()].name = value
             self.dataChanged.emit(index, index)

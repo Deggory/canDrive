@@ -14,9 +14,9 @@ class ComPortListModel(QAbstractListModel):
         return len(self.__com_ports)
 
     def flags(self, index):
-        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
+        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable # type: ignore
 
-    def data(self, index, role):
+    def data(self, index: QModelIndex, role: int=Qt.ItemDataRole.DisplayRole):
         """return value or edit value"""
         com_port = self.__com_ports[index.row()]
         if role == Qt.ItemDataRole.ToolTipRole:
