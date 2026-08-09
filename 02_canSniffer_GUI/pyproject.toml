@@ -1,0 +1,15 @@
+[project]
+name = "cansniffer-gui"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "pyserial",
+    "pyqt6",
+    "qtmodern",
+    "pyyaml",
+    "pydantic",
+    "pydantic-yaml",
+    "pytest",
+    "pytest-qt",
+    "pytest-coverage"
+]

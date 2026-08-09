@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout
 
 from core.project_data import ProjectData
 from gui.decoded_messages_widget.decoded_messages_table_view import DecodedMessagesTableView

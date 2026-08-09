@@ -1,6 +1,6 @@
 from typing import Any
 
-from PyQt5.QtCore import QModelIndex, QAbstractTableModel, Qt
+from PyQt6.QtCore import QModelIndex, QAbstractTableModel, Qt
 
 from core.project_data import ProjectData
 
@@ -22,7 +22,7 @@ class LabelDictionaryModel(QAbstractTableModel):
         return len(self.__horizontal_headers)
 
     def data(self, index: QModelIndex, role: int = ...):
-        if role in [Qt.DisplayRole, Qt.EditRole]:
+        if role in [Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole]:
             key = [d for d in self.__data.keys()][index.row()]
             if index.column() == 0:
                 return key
@@ -31,12 +31,12 @@ class LabelDictionaryModel(QAbstractTableModel):
             else:
                 print("index is not 0 or 1")
 
-        if role == Qt.TextAlignmentRole:
-            return Qt.AlignVCenter | Qt.AlignHCenter
+        if role == Qt.ItemDataRole.TextAlignmentRole:
+            return Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter
 
     def headerData(self, section: int, orientation: Any, role: int = ...) -> Any:
-        if orientation == Qt.Horizontal and section < len(self.__horizontal_headers):
-            if role == Qt.DisplayRole:
+        if orientation == Qt.Orientation.Horizontal and section < len(self.__horizontal_headers):
+            if role == Qt.ItemDataRole.DisplayRole:
                 return self.__horizontal_headers[section]
 
     def add_data(self, key, value):
@@ -51,12 +51,12 @@ class LabelDictionaryModel(QAbstractTableModel):
 
     def flags(self, index):
         if index.column() == 1:
-            return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
+            return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEditable
         else:
-            return Qt.ItemIsEnabled
+            return Qt.ItemFlag.ItemIsEnabled
 
     def setData(self, index, value, role):
-        if role == Qt.EditRole:
+        if role == Qt.ItemDataRole.EditRole:
             key = [d for d in self.__data.keys()][index.row()]
             self.__data[key] = value
             self.dataChanged.emit(index, index)

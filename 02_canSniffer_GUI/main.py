@@ -6,9 +6,9 @@ import qtmodern
 from qtmodern import styles
 from qtmodern import windows
 
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QVBoxLayout, QSizeGrip
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QVBoxLayout, QSizeGrip
+from PyQt6.QtCore import Qt
 
 from old.can_sniffer_gui import CanSnifferGUI
 

@@ -1,6 +1,6 @@
 from typing import Any
 
-from PyQt5.QtCore import Qt, QModelIndex
+from PyQt6.QtCore import Qt, QModelIndex
 
 from core.can_message.decoded_can_message import DecodedCanMessage
 from core.message_table_model.base_message_table_model import BaseMessageTableModel

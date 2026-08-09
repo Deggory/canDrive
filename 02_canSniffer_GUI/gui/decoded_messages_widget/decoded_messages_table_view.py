@@ -1,5 +1,5 @@
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QTableView, QAbstractScrollArea, QSizePolicy, QAbstractItemView, QHeaderView
+from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QTableView, QAbstractScrollArea, QSizePolicy, QAbstractItemView, QHeaderView
 
 from core.message_table_model.decoded_message_table_model import DecodedMessagesTableModel
 from core.project_data import ProjectData
@@ -12,8 +12,8 @@ class DecodedMessagesTableView(QTableView):
         self.decoded_messages_table_model = DecodedMessagesTableModel(project_data)
         self.setModel(self.decoded_messages_table_model)
 
-        self.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
@@ -22,9 +22,9 @@ class DecodedMessagesTableView(QTableView):
         self.setAlternatingRowColors(True)
         self.setShowGrid(True)
         self.verticalHeader().setStretchLastSection(False)
-        self.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
-        self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
 
         for i in range(5, self.model().columnCount()):
             self.setColumnWidth(i, 32)

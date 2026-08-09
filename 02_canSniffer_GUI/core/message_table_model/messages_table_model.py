@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt, QModelIndex
-from PyQt5.QtGui import QColor
+from PyQt6.QtCore import Qt, QModelIndex
+from PyQt6.QtGui import QColor
 
 from core.can_message.can_message import CanMessage
 from core.can_message.can_message_timestamp import CanMessageTimestamp

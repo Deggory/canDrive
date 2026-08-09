@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTabWidget
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QTabWidget
 
 from core.can_message.decoded_can_message import DecodedCanMessage
 from core.project_data import load_sniff, save_sniff

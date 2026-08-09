@@ -15,11 +15,16 @@ class ProjectData(BaseModel):
 
 def load_sniff(path: Path):
     try:
+        if not path.exists():
+            save_sniff(path, ProjectData())
         with open(path, "r") as f:
-            project_data = ProjectData.model_validate_json(f.read())
+            read_json = f.read()
+            project_data = ProjectData.model_validate_json(read_json)
+            return project_data
     except ValidationError:
         return ProjectData()
-    return project_data
+    except Exception as e:
+        print(e)
 
 
 def save_sniff(path: Path, data: ProjectData):
@@ -95,5 +100,5 @@ def legacy():
 
 
 if __name__ == '__main__':
-    # main()
-    legacy()
+    main()
+    # legacy()

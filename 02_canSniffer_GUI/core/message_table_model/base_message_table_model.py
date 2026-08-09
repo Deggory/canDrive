@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QAbstractTableModel, Qt
+from PyQt6.QtCore import QAbstractTableModel, Qt
 
 from typing import Any
 
@@ -20,6 +20,6 @@ class BaseMessageTableModel(QAbstractTableModel):
         return len(self.__horizontal_headers)
 
     def headerData(self, section: int, orientation: Any, role: int = ...) -> Any:
-        if orientation == Qt.Horizontal and section < len(self.__horizontal_headers):
-            if role == Qt.DisplayRole:
+        if orientation == Qt.Orientation.Horizontal and section < len(self.__horizontal_headers):
+            if role == Qt.ItemDataRole.DisplayRole:
                 return self.__horizontal_headers[section]

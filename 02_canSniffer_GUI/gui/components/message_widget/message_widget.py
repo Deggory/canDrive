@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QHBoxLayout
 
 from core.message_table_model.message_table_filter import COLUMN_ID
 from core.project_data import ProjectData
@@ -62,5 +62,5 @@ class MessageWidget(QWidget):
 
     def on_clicked_message(self, value):
         index = self.messages_view.filter_proxy.index(value.row(), COLUMN_ID)
-        data = self.messages_view.filter_proxy.data(index, Qt.DisplayRole)
+        data = self.messages_view.filter_proxy.data(index, Qt.ItemDataRole.DisplayRole)
         self.message_filter_widget.line_id.setText(str(data))

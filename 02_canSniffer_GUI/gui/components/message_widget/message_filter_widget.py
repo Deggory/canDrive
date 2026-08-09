@@ -1,14 +1,13 @@
-from PyQt5.QtCore import QRegExp
-from PyQt5.QtGui import QRegExpValidator
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QGroupBox, QCheckBox, QHBoxLayout, QSpinBox, QLineEdit, \
+from PyQt6.QtCore import QRegularExpression
+from PyQt6.QtGui import QRegularExpressionValidator
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QGroupBox, QCheckBox, QHBoxLayout, QSpinBox, QLineEdit, \
     QSpacerItem, QSizePolicy, QGridLayout
-
 
 class MessageFilterWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
 
-        size_policy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
         # size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         self.setSizePolicy(size_policy)
@@ -22,11 +21,11 @@ class MessageFilterWidget(QWidget):
         self.__create_filter_groupbox()
         self.__create_decoder_groupbox()
 
-        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.main_layout.addItem(spacer)
 
     def __create_filter_groupbox(self):
-        self.hex_validator = QRegExpValidator(QRegExp(
+        self.hex_validator = QRegularExpressionValidator (QRegularExpression(
             r'\b[1-9A-Fa-f][A-Fa-f0-9]*\b(?: \b[1-9A-Fa-f][A-Fa-f0-9]*\b)*( )?'
         ))
 

@@ -1,5 +1,5 @@
-from PyQt5.QtCore import QSize, Qt, pyqtSignal, QItemSelectionModel, QItemSelection
-from PyQt5.QtWidgets import QTableView, QSizePolicy, QAbstractScrollArea, QAbstractItemView, QMenu
+from PyQt6.QtCore import QSize, Qt, pyqtSignal, QItemSelectionModel, QItemSelection, QModelIndex
+from PyQt6.QtWidgets import QTableView, QSizePolicy, QAbstractScrollArea, QAbstractItemView, QMenu
 
 from core.can_message.can_message import CanMessage
 from core.can_message.can_message_timestamp import CanMessageTimestamp
@@ -69,8 +69,8 @@ class MessageTableView(QTableView):
         self.filter_proxy.setSourceModel(self.messages_model)
         self.setModel(self.filter_proxy)
 
-        self.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
@@ -79,7 +79,7 @@ class MessageTableView(QTableView):
         self.setAlternatingRowColors(True)
         self.setShowGrid(True)
         self.verticalHeader().setStretchLastSection(False)
-        self.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         for i in range(5, self.model().columnCount()):
             self.setColumnWidth(i, 32)
@@ -90,7 +90,7 @@ class MessageTableView(QTableView):
         selected_ids = []
         selection = self.selectionModel()
         for item in selection.selectedRows(1):
-            selected_id = self.model().data(item, Qt.DisplayRole)
+            selected_id = self.model().data(item, Qt.ItemDataRole.DisplayRole)
             if selected_id not in selected_ids:
                 selected_ids.append(selected_id)
 
@@ -100,7 +100,7 @@ class MessageTableView(QTableView):
             set_selection_to_show_action = menu.addAction(f'Set {selected_ids} as show ids')
             set_selection_to_hide_action = menu.addAction(f'Set {selected_ids} as hide ids')
 
-            res = menu.exec_(event.globalPos())
+            res = menu.exec(event.globalPos())
 
             if res == set_selection_to_show_action:
                 self.set_show_ids.emit(selected_ids)
@@ -110,8 +110,11 @@ class MessageTableView(QTableView):
             selection.clearSelection()
 
     def get_last_selected_row_message(self):
-        selection_model: QItemSelectionModel = self.selectionModel()
-        selected_rows: QItemSelection = selection_model.selectedRows()
+        selection_model: QItemSelectionModel | None = self.selectionModel()
+        if not selection_model:
+            return None
+
+        selected_rows: list[QModelIndex] = selection_model.selectedRows()
         if selected_rows:
             last_row = selected_rows[-1]
-            return self.messages_model.data(last_row, Qt.UserRole)
+            return self.messages_model.data(last_row, Qt.ItemDataRole.UserRole)

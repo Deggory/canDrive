@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QHBoxLayout,
@@ -16,6 +16,8 @@ from gui.components.message_widget.message_widget import MessageWidget
 class LiveModeWidget(QWidget):
     def __init__(self, project_data: ProjectData = ProjectData(), parent=None):
         super().__init__(parent=parent)
+
+        print("LiveModeWidget")
 
         self.main_layout = QVBoxLayout()
         self.setLayout(self.main_layout)

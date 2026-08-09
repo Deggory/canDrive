@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QSortFilterProxyModel, Qt, QModelIndex
+from PyQt6.QtCore import QSortFilterProxyModel, Qt, QModelIndex
 
 
 COLUMN_TIME = 0

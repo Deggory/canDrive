@@ -1,5 +1,5 @@
 import serial.tools.list_ports
-from PyQt5.QtCore import QThread
+from PyQt6.QtCore import QThread
 
 from gui.components.com_port.com_port_list_model import ComPortListModel
 

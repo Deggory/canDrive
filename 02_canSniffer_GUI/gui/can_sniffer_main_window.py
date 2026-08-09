@@ -1,7 +1,8 @@
 from functools import partial
 from pathlib import Path
 
-from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QFileDialog, QMessageBox
+from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import QMainWindow, QWidget, QFileDialog, QMessageBox
 
 from core.project_data import load_legacy, save_sniff
 from core.user_preferences import UserPreferences
@@ -16,7 +17,7 @@ class CanSnifferMainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.main_widget = None
-        # self.__load_styles()
+        self.__load_styles()
 
         self.user_prefs = UserPreferences.load()
 
@@ -134,17 +135,19 @@ class CanSnifferMainWindow(QMainWindow):
             self, "New project", f"{self.user_prefs.default_project_location}", "*.sniff")
         return path
 
-    def new_project_dialog(self) -> Path:
+    def new_project_dialog(self) -> Path | None:
+
         path = self.show_new_file_dialog()
 
         if not path:
-            return
+            return None
 
         project_path = Path(path)
 
         if project_path not in self.user_prefs.recent_projects:
             self.user_prefs.add_recent_project(project_path)
             self.add_recent_project(project_path)
+
         return project_path
 
     # noinspection PyAttributeOutsideInit
@@ -165,7 +168,7 @@ class CanSnifferMainWindow(QMainWindow):
 
     def on_open_and_covert_legacy_project(self):
         d = QFileDialog.getExistingDirectory(
-            self, CONVERT_STR, f"{self.user_prefs.default_project_location}", QFileDialog.ShowDirsOnly
+            self, CONVERT_STR, f"{self.user_prefs.default_project_location}", QFileDialog.Option.ShowDirsOnly
         )
 
         try:

@@ -3,14 +3,14 @@ import time
 import csv
 
 import serial
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QColor
 import serial.tools.list_ports
 
 from core import SerialReader, SerialWriter, HideOldPackets, FileLoader
 
 from old import canSniffer_ui
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QMainWindow,
     QApplication,
     QTableWidgetItem,

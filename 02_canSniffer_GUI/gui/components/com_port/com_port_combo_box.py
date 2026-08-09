@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QComboBox
+from PyQt6.QtWidgets import QComboBox
 
 from gui.components.com_port.com_port_list_model import ComPortListModel
 from gui.components.com_port.com_port_thread import ComPortsThread

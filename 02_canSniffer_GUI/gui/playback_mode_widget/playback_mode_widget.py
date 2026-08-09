@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QSpinBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QSpinBox
 
 from core.project_data import ProjectData
 from gui.components.message_widget.message_widget import MessageWidget
@@ -7,6 +7,8 @@ from gui.components.message_widget.message_widget import MessageWidget
 class PlaybackModeWidget(QWidget):
     def __init__(self, project_data: ProjectData = ProjectData(), parent=None):
         super().__init__(parent=parent)
+
+        print("PlaybackModeWidget")
 
         self.main_layout = QVBoxLayout()
         self.setLayout(self.main_layout)
