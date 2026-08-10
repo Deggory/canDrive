@@ -1,5 +1,6 @@
 from PyQt6.QtCore import QSortFilterProxyModel, Qt, QModelIndex
 
+from core.can_message.can_message_timestamp import CanMessageTimestamp
 
 COLUMN_TIME = 0
 COLUMN_ID = 1
@@ -89,14 +90,15 @@ class MessageTableFilterProxyModel(QSortFilterProxyModel):
 
     def show_packets_with_id_filter(self, source_row, source_parent):
         index = self.sourceModel().index(source_row, COLUMN_ID, source_parent)
-        value = self.sourceModel().data(index, Qt.ItemDataRole.DisplayRole)
-        if value in self.show_packets_with_id_list:
+        can_message: CanMessageTimestamp = self.sourceModel().data(index, Qt.ItemDataRole.UserRole)
+        if can_message.can_message.identifier in self.show_packets_with_id_list:
             return True
         return False
 
+
     def hide_packets_with_id_filter(self, source_row, source_parent):
         index = self.sourceModel().index(source_row, COLUMN_ID, source_parent)
-        value = self.sourceModel().data(index, Qt.ItemDataRole.DisplayRole)
-        if value not in self.hide_packets_with_id_list:
+        can_message: CanMessageTimestamp = self.sourceModel().data(index, Qt.ItemDataRole.UserRole)
+        if can_message.can_message.identifier not in self.hide_packets_with_id_list:
             return True
         return False

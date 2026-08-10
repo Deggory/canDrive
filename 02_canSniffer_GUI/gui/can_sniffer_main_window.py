@@ -136,9 +136,7 @@ class CanSnifferMainWindow(QMainWindow):
         return path
 
     def new_project_dialog(self) -> Path | None:
-
         path = self.show_new_file_dialog()
-
         if not path:
             return None
 
