@@ -90,7 +90,8 @@ class MessageTableView(QTableView):
         selected_ids = []
         selection = self.selectionModel()
         for item in selection.selectedRows(1):
-            selected_id = self.model().data(item, Qt.ItemDataRole.DisplayRole)
+            can_message: CanMessageTimestamp = self.model().data(item, Qt.ItemDataRole.UserRole)
+            selected_id = can_message.can_message.identifier
             if selected_id not in selected_ids:
                 selected_ids.append(selected_id)
 
